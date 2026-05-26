@@ -1,0 +1,47 @@
+:root {
+    --bg-main: #0b0f19;
+    --bg-card: #131c2e;
+    --bg-input: #1e293b;
+    --border: #2d3748;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --indigo: #4f46e5;
+    --amber: #f59e0b;
+    --rose: #ef4444;
+    --radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 360px; height: 540px; background: var(--bg-main); color: var(--text-main); font-family: system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden; }
+
+.extension-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); }
+.brand-group { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.brand-logo-icon { color: var(--indigo); font-size: 20px; }
+.brand-title { font-weight: 700; font-size: 16px; }
+.user-pill-tag { background: var(--bg-input); padding: 4px 10px; border-radius: 50px; font-size: 11px; color: var(--text-muted); max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.panel-section { display: none; flex-direction: column; flex: 1; overflow: hidden; padding: 14px; gap: 14px; }
+.panel-section.active { display: flex; }
+.auth-toggle-ribbon { display: flex; background: var(--bg-input); padding: 4px; border-radius: var(--radius); }
+.sub-tab { flex: 1; padding: 8px; background: transparent; border: none; color: var(--text-muted); font-weight: 600; cursor: pointer; border-radius: 8px; }
+.sub-tab.active { background: var(--bg-card); color: var(--indigo); }
+
+.spacing-container { display: flex; flex-direction: column; gap: 12px; }
+.form-control-row input { width: 100%; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); padding: 10px 12px; border-radius: var(--radius); outline: none; font-size: 13px; }
+.flex-row-layout { display: flex; gap: 8px; }
+.flex-grow-element { flex: 1; }
+
+.button-cta-primary { background: var(--indigo); color: white; border: none; padding: 11px; border-radius: var(--radius); font-weight: 600; cursor: pointer; }
+.button-cta-secondary { background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border); padding: 10px; border-radius: var(--radius); font-weight: 600; cursor: pointer; }
+.match-parent { width: 100%; }
+.star-toggle-button { background: var(--bg-input); border: 1px solid var(--border); color: var(--text-muted); width: 38px; border-radius: var(--radius); cursor: pointer; }
+.star-toggle-button.active { color: var(--amber); border-color: var(--amber); }
+
+.vault-repository-area { display: flex; flex-direction: column; flex: 1; overflow: hidden; gap: 10px; }
+.scrolling-vault-list-canvas { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.vault-item-row { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+.row-header { display: flex; justify-content: space-between; }
+.row-badge { color: var(--indigo); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+
+.popup-toast-component { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%) translateY(60px); background: var(--indigo); color: white; padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 600; opacity: 0; transition: all 0.3s ease; z-index: 9999; }
+.popup-toast-component.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+.icon-btn-action { background: transparent; border: none; color: var(--text-muted); cursor: pointer; }

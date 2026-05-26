@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeepSpace | Executive Vault Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="auth-overlay" class="auth-overlay active">
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <button id="tab-login" class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
+                <button id="tab-signup" class="auth-tab" onclick="switchAuthTab('signup')">Create Account</button>
+            </div>
+            <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="auth-form">
+                <div class="input-group" id="group-username" style="display:none;">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="auth-username" placeholder="Username ID">
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="auth-email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="auth-password" placeholder="System Protection Key" required>
+                </div>
+                <button type="submit" id="auth-btn" class="btn btn-primary btn-block">Authenticate System Identity</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand-zone">
+                <div class="brand-logo"><i class="fa-solid fa-compass-drafting"></i></div>
+                <span class="brand-name">KeepSpace</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-target="panel-home"><i class="fa-solid fa-chart-pie"></i>Overview</a>
+                <a href="#" class="nav-item" data-target="panel-bookmarks"><i class="fa-solid fa-bookmark"></i>Vault Space</a>
+                <a href="#" class="nav-item" data-target="panel-settings"><i class="fa-solid fa-sliders"></i>Parameters</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="theme-toggle" onclick="toggleThemeSystem()">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    <span id="theme-text">Dark Canvas</span>
+                </div>
+                <button class="logout-btn" onclick="logoutSession()"><i class="fa-solid fa-right-from-bracket"></i>Exit Systems</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="global-search" placeholder="Query repository space..." oninput="filterSystemView()">
+                </div>
+                <div class="user-profile-badge">
+                    <div class="user-avatar" id="avatar-letters">KS</div>
+                    <div class="user-meta">
+                        <span class="user-name" id="profile-name">Guest Identity</span>
+                        <span class="user-status" id="profile-email">Connecting server...</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="panels-container">
+                <section id="panel-home" class="view-panel active">
+                    <div class="welcome-banner">
+                        <h1>Salutations Workspace Analyst!</h1>
+                        <p>Ecosystem metrics synced and secure cloud channels open.</p>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="icon-box color-1"><i class="fa-solid fa-cloud"></i></div>
+                            <div class="metric-info">
+                                <h3 id="stat-total">0</h3>
+                                <p>Total Assets Saved</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="icon-box color-2"><i class="fa-solid fa-star"></i></div>
+                            <div class="metric-info">
+                                <h3 id="stat-favs">0</h3>
+                                <p>Starred Items</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="icon-box color-3"><i class="fa-solid fa-tags"></i></div>
+                            <div class="metric-info">
+                                <h3 id="stat-categories">0</h3>
+                                <p>Operational Contexts</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recent-section">
+                        <h2>Recently Manifested Records</h2>
+                        <div class="grid-layout" id="recent-grid-view"></div>
+                    </div>
+                </section>
+
+                <section id="panel-bookmarks" class="view-panel">
+                    <div class="action-bar">
+                        <div class="filter-controls">
+                            <select id="filter-category" onchange="filterSystemView()">
+                                <option value="all">All Category Views</option>
+                            </select>
+                            <select id="sort-order" onchange="filterSystemView()">
+                                <option value="newest">Chronological (Newest)</option>
+                                <option value="oldest">Chronological (Oldest)</option>
+                                <option value="alpha">Alphabetical Sorting</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="openCreateModal()"><i class="fa-solid fa-plus"></i> Add Link Document</button>
+                    </div>
+                    <div class="grid-layout" id="bookmarks-primary-grid"></div>
+                </section>
+
+                <section id="panel-settings" class="view-panel">
+                    <div class="settings-container">
+                        <h2>Ecosystem Control Matrix</h2>
+                        <div class="settings-card">
+                            <h3>Data Import/Export Interface</h3>
+                            <p>Manage raw system migration via verified JSON data-transfer trees.</p>
+                            <div class="settings-actions">
+                                <button class="btn btn-secondary" onclick="exportDataSchema()"><i class="fa-solid fa-file-export"></i> Export JSON Repository</button>
+                                <button class="btn btn-secondary" onclick="document.getElementById('import-file').click()"><i class="fa-solid fa-file-import"></i> Import System Schema</button>
+                                <input type="file" id="import-file" style="display:none;" accept=".json" onchange="importDataSchema(event)">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal-layer" class="modal-layer">
+        <div class="modal-card">
+            <h2 id="modal-title">Append Node Pointer</h2>
+            <form id="modal-form" onsubmit="handleFormSubmission(event)">
+                <input type="hidden" id="entry-id">
+                <div class="input-group">
+                    <input type="text" id="entry-title" placeholder="Context Title Label" required>
+                </div>
+                <div class="input-group">
+                    <input type="url" id="entry-url" placeholder="Resource Target Address URL" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="entry-category" placeholder="Context Classification Identifier (e.g., Engineering, Finance)">
+                </div>
+                <div class="input-group">
+                    <textarea id="entry-notes" placeholder="Descriptive annotations and analytical metrics..." rows="3"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModalLayer()">Abort Operation</button>
+                    <button type="submit" class="btn btn-primary">Commit Changes To Cloud</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
